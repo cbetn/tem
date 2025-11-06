@@ -47,6 +47,9 @@ SQL> CREATE OR REPLACE PROCEDURE Update_Total_Average(
 
 
 
+functions
+
+
 
 select empid,emp_name,join_date,NEXT_DAY(join_date,'FRIDAY' as next_Friday From emp1;
 nullif(salary,5000000)
@@ -54,6 +57,28 @@ addmonth(joindate,6)
 nvl2(salary,'yes','no')
 round(,3)
 truncate(,3)
+
+
+
+view join
+
+
+create or replace_view as
+select empid,ename,deptid
+from employee27;
+
+select ev.empid,ev.ename,ev.deptid
+from employee_view ev
+join dept27 d on ev.deptid=d.deptid
+where d.dname='it';
+
+create or replace view emp_dept as
+select e.ename, d.dname
+from employee e
+join dep27 d on e.deptid=d.deptid;
+group by d.deptid,d,dname;
+
+drop view name;
 
 trigger
 
