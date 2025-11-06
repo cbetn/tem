@@ -1,3 +1,8 @@
+alter
+alter table tablename add dest varcha();
+
+
+
 procedure or function
 
 
@@ -80,6 +85,19 @@ group by d.deptid,d,dname;
 
 drop view name;
 
+
+subquery
+select*from employee27 where jobtitle not in('manager');
+select*from employee27 where deptid in(select from dept27 where location='new york')
+select*from employee27 where deptid not in(select deptid from dept27);
+#Find employees earning more than at least one employee in HR.
+select*from employee27 where salary>some(select salary from employee27 where deptid=(select deptid from dept27 where dname='hr'));
+...................................>all.........................
+..................................<some
+..................................<all
+...................................=
+select deptid,dname from dept27 d where exists(select 1 from employee27 e where e.deptid=d.deptid);
+...................................... not exists
 trigger
 
 create table student
