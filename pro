@@ -54,3 +54,39 @@ X = userB ;
 X = userC
 
 
+
+
+
+knows(alice,bob).
+knows(bob,charlie).
+knows(charlie,dana).
+
+worksat(alice,techcorp).
+worksat(bob,techcorp).
+worksat(charlie,softsolutions).
+worksat(dana,softsolutions).
+
+programsin(alice,python).
+programsin(dana,python).
+programsin(bob,java).
+programsin(bob,python).
+programsin(charlie,cplusplus).
+
+similarto(python,java).
+similarto(python,cplusplus).
+similarto(cplusplus,java).
+
+connected(X,Y):-knows(X,Y).
+connected(X,Y):-knows(Y,X).
+connected(X,Y):-knows(X,Z),knows(Z,Y).
+
+colleagues(X,Y):-worksat(X,C),worksat(Y,C),X\=Y.
+
+skill(X,Y):-programsin(X,P),programsin(Y,P),X\=Y.
+
+%query
+colleagues(alice,Y).
+skill(bob,Y).
+skill(X,Y),worksat(X,C1),worksat(Y,C2),C1\=C2.
+connected(charlie,Y).
+knows(X,P),\+worksat(X,techcorp).
