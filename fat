@@ -152,7 +152,7 @@ if __name__ == "__main__":
     solution = BFS(G, start=start_dept, goal=goal_dept)
     print("\nShortest Collaboration Path:")
     if solution:
-        print(" → ".join(solution))
+        print(" -> ".join(solution))
     else:
         print("No path found between the departments.")
 
