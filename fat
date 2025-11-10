@@ -68,15 +68,14 @@ class GraphVisualizer:
 
 #BFS
 
+from collections import deque
 import pandas as pd
 import networkx as nx
-from collections import deque
+from itertools import combinations
 from graph_visualizer import GraphVisualizer
 
 
-# -------------------------------
-# Node class (same as your version)
-# -------------------------------
+# ---------- Node class ----------
 class Node:
     def __init__(self, state, parent=None):
         self.STATE = state
@@ -86,18 +85,9 @@ class Node:
         return f"{self.STATE}"
 
 
-# -------------------------------
-# Helper functions
-# -------------------------------
+# ---------- Helper functions ----------
 def GOAL_TEST(node, goal):
     return node.STATE == goal
-
-
-def CHILD_NODES(node, G):
-    children = []
-    for neighbor in G.neighbors(node.STATE):
-        children.append(Node(state=neighbor, parent=node))
-    return children
 
 
 def SOLUTION(node):
@@ -108,10 +98,11 @@ def SOLUTION(node):
     return list(reversed(path))
 
 
-# -------------------------------
-# Breadth-First Search Algorithm
-# -------------------------------
+# ---------- BFS for shortest collaboration path ----------
 def BFS(G, start, goal):
+    """
+    Finds the shortest collaboration path between two departments using BFS.
+    """
     node = Node(start, parent=None)
     frontier = deque([node])
     explored = set()
@@ -123,48 +114,61 @@ def BFS(G, start, goal):
         if GOAL_TEST(node, goal):
             return SOLUTION(node)
 
-        for child in CHILD_NODES(node, G):
-            if (child.STATE not in explored) and all(
-                child.STATE != n.STATE for n in frontier
-            ):
-                frontier.append(child)
+        for neighbor in G.neighbors(node.STATE):
+            if neighbor not in explored and all(neighbor != n.STATE for n in frontier):
+                frontier.append(Node(state=neighbor, parent=node))
     return None
 
 
-# -------------------------------
-# Main Program
-# -------------------------------
-if __name__ == "__main__":
-    # Load department hierarchy
-    df = pd.read_csv("department_hierarchy.csv")
-
-    # Build graph using NetworkX
+# ---------- Build Collaboration Graph from CSV ----------
+def build_collaboration_graph(csv_path="department_project.csv"):
+    df = pd.read_csv(csv_path)
     G = nx.Graph()
-    for _, row in df.iterrows():
-        G.add_edge(row["Parent_Department"], row["Sub_Department"])
 
-    # Pick start and goal departments (you can change these)
-    start = "Executive"
-    goal = "R&D"
+    # Add edges between departments that share a project
+    for project, group in df.groupby('Project'):
+        departments = list(group['Department'])
+        for dept1, dept2 in combinations(departments, 2):
+            G.add_edge(dept1, dept2, project=project)
+    return G
 
-    # Run BFS to find shortest path
-    solution = BFS(G, start=start, goal=goal)
-    print("Shortest collaboration path:", solution)
 
-    # Visualize the result
+# ---------- Main Execution ----------
+if __name__ == "__main__":
+    # Build the collaboration graph
+    G = build_collaboration_graph("department_project.csv")
+
+    # Show adjacency list
+    adj_list = {dept: list(G.neighbors(dept)) for dept in G.nodes()}
+    print("Adjacency List Representation:")
+    for dept, neighbors in adj_list.items():
+        print(f"{dept}: {neighbors}")
+
+    # Select start and goal departments
+    start_dept = "HR"
+    goal_dept = "Engineering"
+
+    # Find the shortest collaboration path
+    solution = BFS(G, start=start_dept, goal=goal_dept)
+    print("\nShortest Collaboration Path:")
     if solution:
-        pos = nx.spring_layout(G, seed=42)
-        path_edges = list(zip(solution, solution[1:]))
-
-        graph = GraphVisualizer(
-            G.edges,
-            pos=pos,
-            solution_edges=path_edges,
-            is_solution_directed=True,
-        )
-        graph.draw_graph(title=f"BFS Shortest Path: {start} → {goal}")
+        print(" → ".join(solution))
     else:
-        print("No path found between departments!")
+        print("No path found between the departments.")
+
+    # ---------- Visualization ----------
+    pos = nx.spring_layout(G, seed=42)
+    path_edges = list(zip(solution, solution[1:])) if solution else []
+
+    graph = GraphVisualizer(
+        edges=G.edges,
+        pos=pos,
+        weighted=None,
+        solution_edges=path_edges,
+        is_solution_directed=False
+    )
+
+    graph.draw_graph(title=f"Collaboration Network: {start_dept} → {goal_dept}")
 
 
 
