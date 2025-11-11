@@ -121,15 +121,15 @@ def BFS(G, start, goal):
 
 
 # ---------- Build Collaboration Graph from CSV ----------
-def build_collaboration_graph(csv_path="department_project.csv"):
+def build_collaboration_graph(csv_path="department_project.csv"):   #name should be changed
     df = pd.read_csv(csv_path)
     G = nx.Graph()
 
     # Add edges between departments that share a project
-    for project, group in df.groupby('Project'):
-        departments = list(group['Department'])
+    for project, group in df.groupby('Project'):      #name should be changed
+        departments = list(group['Department'])       #name should be changed
         for dept1, dept2 in combinations(departments, 2):
-            G.add_edge(dept1, dept2, project=project)
+            G.add_edge(dept1, dept2, project=project)  #
     return G
 
 
@@ -139,22 +139,22 @@ if __name__ == "__main__":
     G = build_collaboration_graph("department_project.csv")
 
     # Show adjacency list
-    adj_list = {dept: list(G.neighbors(dept)) for dept in G.nodes()}
+    adj_list = {dept: list(G.neighbors(dept)) for dept in G.nodes()} #
     print("Adjacency List Representation:")
-    for dept, neighbors in adj_list.items():
+    for dept, neighbors in adj_list.items():                         #
         print(f"{dept}: {neighbors}")
 
     # Select start and goal departments
-    start_dept = "HR"
-    goal_dept = "Engineering"
+    start_dept = "HR"                #change start node
+    goal_dept = "Engineering"        #change end node
 
     # Find the shortest collaboration path
     solution = BFS(G, start=start_dept, goal=goal_dept)
-    print("\nShortest Collaboration Path:")
+    print("\nShortest  Path:")
     if solution:
         print(" -> ".join(solution))
     else:
-        print("No path found between the departments.")
+        print("No path found between the departments.")   #change this    
 
     # ---------- Visualization ----------
     pos = nx.spring_layout(G, seed=42)
@@ -168,7 +168,7 @@ if __name__ == "__main__":
         is_solution_directed=False
     )
 
-    graph.draw_graph(title=f"Collaboration Network: {start_dept} → {goal_dept}")
+    graph.draw_graph(title=f"Collaboration Network: {start_dept} -> {goal_dept}")   #change this
 
 
 
@@ -291,17 +291,17 @@ if __name__ == "__main__":
     # Load department hierarchy dataset
     df = pd.read_csv("department_hierarchy.csv")
 
-    # Create a directed graph (Parent → Sub-Department)
+    # Create a directed graph (Parent -> Sub-Department)
     G = nx.DiGraph()
     for _, row in df.iterrows():
-        G.add_edge(row["Parent_Department"], row["Sub_Department"])
-
+        G.add_edge(row["Parent_Department"], row["Sub_Department"])  #give the head of the coding
+ 
     # Assign random priority to each department (1–10)
     for node in G.nodes:
         G.nodes[node]["priority"] = random.randint(1, 10)
 
-    start = "Executive"
-    goal = "R&D"
+    start = "Executive"   #change the name
+    goal = "R&D"          #change the name
 
     # (a) Normal DFS path
     path = DFS(G, start, goal)
