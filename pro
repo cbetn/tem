@@ -90,3 +90,41 @@ skill(bob,Y).
 skill(X,Y),worksat(X,C1),worksat(Y,C2),C1\=C2.
 connected(charlie,Y).
 knows(X,P),\+worksat(X,techcorp).
+
+
+
+
+% Two people share the same hobby
+same_hobby(X, Y) :-
+    hobby(X, H),
+    hobby(Y, H),
+    X \= Y.
+
+% Find employees who are parents
+employee_parent(X, Company) :-
+    works(X, Company),
+    parent(X, _).
+
+% People who play a sport and work at same company as someone
+sport_and_same_company(X, Person) :-
+    plays(X, _),
+    works(X, Company),
+    works(Person, Company),
+    X \= Person.
+
+% Connected through knows relationship
+connected(X, Y) :- knows(X, Y).
+connected(X, Y) :- knows(Y, X).
+
+connected_to_both(X, P1, P2) :-
+    connected(X, P1),
+    connected(X, P2),
+    P1 \= P2,
+    X \= P1,
+    X \= P2.
+
+% Parent-child who share at least one hobby
+parent_child_shared_hobby(P, C) :-
+    parent(P, C),
+    hobby(P, H),
+    hobby(C, H).
