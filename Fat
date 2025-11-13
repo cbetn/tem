@@ -635,44 +635,6 @@ df=pd.DataFrame({'a':np.random.randn(1000)+1,'b':np.random.randn(1000),'c':np.ra
 df.plot(kind='hist',bins=20)
 plt.show()
 
-scipy integration
-
-
-import numpy as np
-from scipy import integrate
-import matplotlib.pyplot as plt
-
-def f(x):
-  return np.sin(x)
-int_res,err=integrate.quad(f,0,np.pi)
-print(f"Numerical interadetion result:{int_res}")
-print(f"Error:{err}")
-
-def f(x):
-  return x**2
-int_res,err=integrate.quad(f,0,1)
-print(f"Numerical interadetion result:{int_res}")
-print(f"Error:{err}")
-
-def f(x):
-  return np.exp(-x)
-int_res,err=integrate.quad(f,0,np.inf)
-print(f"Numerical interadetion result:{int_res}")
-print(f"Error:{err}")
-
-def model(y,t):
-  return -2*y
-y0=1
-t=np.linspace(0,10,100)
-sol=integrate.odeint(model,y0,t)
-plt.figure(figsize=(8,6))
-plt.plot(t,sol,label='y(t)=e^{-2t}',color='blue')
-plt.title("solution if ODE dy/dt=-2y")
-plt.xlabel("time T")
-plt.ylabel("y(t)")
-plt.grid(True)
-plt.legend()
-plt.show()
 
 import scipy.optimize as opt
 import numpy as np
