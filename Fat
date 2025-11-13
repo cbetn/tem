@@ -1,0 +1,687 @@
+get a array and impoet numpy
+
+
+import numpy as np
+
+import numpy as np
+x=np.array([[1,2,3,4,5],[1,2,3,4,5]])
+print(x)
+print(x.shape)
+print(x.dtype)
+print(x.ndim)
+
+
+import numpy as np
+arr = np.array([10, 20, 30, 40, 50, -1,0,60, 70, 80, 90, 100])
+
+# Integer array indexing
+indices = np.array([1, 3, 5])
+print ("Integer array indexing:", arr[indices])
+
+# boolean array indexing
+cond = arr <= 0
+print ("\nElements greater than 0:\n", arr[cond])
+
+y=np.array([[1,2,3],[4,5,6],[7,8,9]])
+print(y)
+print(y.shape)
+print(y.dtype)
+print(y.ndim)
+
+z=np.array([[[1,2,3],[4,5,6]],[[7,8,9],[10,11,12]]])
+print(z)
+print(z.shape)
+print(z.ndim)
+print(z.dtype)
+
+a=np.array([1,2,3])
+b=np.array([4,5,6])
+print(a+b)
+print(np.add(a,b))
+print(a-b)
+print(np.subtract(a,b))
+print(a*b)
+print(np.multiply(a,b))
+
+v=np.array([1,4])
+w=np.array([2,3])
+print(v.dot(w))
+print(np.dot(v,w))
+print(v@w)
+
+x=np.array([[1,2],[3,4]])
+y=np.array([5,6])
+print(y.shape)
+print(x.shape)
+print(x.dot(y))
+print(y.dot(x))
+
+a=np.array([[1,2,3],[4,5,6]])
+b=np.array([[5,6,7],[7,8,5],[9,10,6]])
+#print("a dot product b",a.dot(b))
+#print("b dot product a",b@a)
+print("a transpose",a.T)
+c=np.array([[1,2,3],[4,5,6],[7,8,9]]) # This matrix is singular and cannot be inverted.
+#print(np.linalg.inv(c))
+print(np.linalg.inv(b)) # Only square matrices can be inverted.
+
+#
+
+1.
+
+import numpy as np
+array1=np.arange(1,13)
+print(array1)
+
+mat=array1.reshape(4,3)
+print(mat)
+
+scalar=np.array([1,2,3,4])
+result1=mat*scalar[:,np.newaxis]
+print(result1)
+result2=mat+scalar[:,np.newaxis]
+print(result2)
+
+2. matrix functions
+
+print(np.sum(mat))
+print(np.mean(mat))
+print(np.max(mat))
+print(np.min(mat))
+print(mat[mat>=8])
+
+mat1=np.array([[1,2,3],[4,5,6],[8,7,9]])
+print(np.linalg.inv(mat1))
+print(np.linalg.det(mat1))
+print(np.linalg.matrix_rank(mat1))
+
+
+print(np.identity(3))
+print(np.zeros(3))
+
+d_element=[1,2,3,4]
+print(np.diag(d_element))
+
+my_list=[10,25,15,30,20,5]
+n_array=np.array(my_list)
+print(my_list)
+mean=np.mean(n_array)
+print(mean)
+med=np.median(n_array)
+print(med)
+var=np.var(n_array)
+print(var)
+
+copy and view of an array
+
+
+a=np.array([1,2,3,4,5,6,7])
+a[0]=10
+print(a)
+b=a[3:]
+c=a[:3]
+c[0]=4
+print(a)
+print(c)
+print(b)
+d=a[1:5:2]
+print(d)
+print(a)
+
+a=np.array([[1,2,3],[4,5,6],[7,8,9]])
+d=a[:2]
+print(d)
+d=a[2:]
+print(d)
+col=[row[:2] for row in a]
+print(col)
+
+pip install matplotlib
+
+import matplotlib.pyplot as plt
+
+import numpy as np
+
+xpoint=np.array([0,6])
+ypoint=np.array([0,250])
+plt.plot(xpoint,ypoint)
+plt.show()
+
+xpoint=np.array([0,6,24])
+ypoint=np.array([0,250,300])
+plt.plot(xpoint,ypoint,"o")
+plt.show()
+
+xpoint=np.array([0,6,24,30])
+ypoint=np.array([0,250,300,270])
+plt.plot(xpoint,ypoint)
+plt.show()
+
+xpoint=np.array([0,6,24,30])
+ypoint=np.array([0,250,300,270])
+plt.scatter(xpoint,ypoint,c='red')
+plt.plot(xpoint,ypoint,c='red',marker='o',mfc='blue',mec='red')
+x=np.array([0,10,7,12])
+y=np.array([0,150,320,400])
+plt.scatter(x,y,c='blue')
+plt.plot(x,y,c='yellow',linestyle="dashed")
+plt.xlabel('Days in a month')
+plt.ylabel('Sales')
+plt.title("Sales report of the month")
+plt.grid()
+plt.show()
+
+xpoint=np.array([10,20,10,20])
+ypoint=np.array([300,300,200,200])
+plt.scatter(xpoint,ypoint,c='red')
+plt.plot(xpoint,ypoint,c='red',marker='o',mfc='blue',mec='red')
+x=np.array([10,15,20])
+y=np.array([300,400,300])
+plt.scatter(x,y,c='blue')
+plt.plot(x,y,c='blue',marker='*',mfc='blue',mec='red',linestyle="dashed")
+plt.xlabel('Days in a month')
+plt.ylabel('Sales')
+plt.title("Sales report of the month")
+plt.grid()
+plt.show()
+
+xpoint=np.array([10,20,10,20])
+ypoint=np.array([300,300,200,200])
+plt.subplot(1,2,1)
+plt.scatter(xpoint,ypoint,c='red')
+plt.plot(xpoint,ypoint,c='red',marker='o',mfc='blue',mec='red')
+plt.xlabel('Days in a month')
+plt.ylabel('Sales')
+plt.title("Sales report of the month")
+x=np.array([10,15,20])
+y=np.array([300,400,300])
+plt.subplot(1,2,2)
+plt.scatter(x,y,c='blue')
+plt.plot(x,y,c='blue',marker='*',mfc='blue',mec='red',linestyle="dashed")
+plt.xlabel('Days in a month')
+plt.ylabel('Sales')
+plt.title("Sales report of the month")
+xpoint=np.array([0,6,24,30])
+ypoint=np.array([0,250,300,270])
+plt.scatter(xpoint,ypoint,c='red')
+plt.plot(xpoint,ypoint,c='red',marker='o',mfc='blue',mec='red')
+plt.subplot(3,2,1)
+plt.xlabel('Days in a month')
+plt.ylabel('Sales')
+plt.title("Sales report of the month")
+plt.suptitle("Salse report")
+
+plt.show()
+
+x=np.array([1,2,3,4,1,2,5,6,7,3,8,9,6,1,1,1])
+y=np.array([99,86,87,88,111,86,103,87,94,78,77,85,86,89,72,34])
+sizes=np.array([100,200,300,450,500,650,550,700, 400, 350, 250, 150, 600,700,800,999]) # Added sizes to match the number of data points
+plt.scatter(x,y,s=sizes)
+plt.show()
+
+x=np.array(['a','b','c','d','e','f','g'])
+y=np.array([99,86,87,88,111,86,100])
+plt.bar(x,y,color='purple')
+plt.show()
+
+x=np.array(['a','b','c','d','e','f','g'])
+y=np.array([99,86,87,88,111,86,100])
+plt.barh(x,y,color='purple')
+plt.show()
+
+
+x=np.random.normal(120,5,200)
+plt.hist(x)
+plt.show()
+
+
+y=np.array([35,20,25,10,15])
+mylable=["a grade", "b grade", "c grade", "d grade", "e grade"]
+myexplode=[0,0,0,0,0.2] # Added one more element to match the number of data points
+plt.pie(y,labels=mylable, explode=myexplode) # Added explode argument
+plt.legend(title="grade",loc='upper right',bbox_to_anchor=(1.5,1))
+plt.show()
+
+y=np.array([35,20,25,10,15])
+mylable=["a grade", "b grade", "c grade", "d grade", "e grade"]
+myexplode=[0,0,0,0,0]
+plt.pie(y,labels=mylable, explode=myexplode, startangle=90)
+centre_circle = plt.Circle((0,0),0.70,fc='white')
+fig = plt.gcf()
+fig.gca().add_artist(centre_circle)
+plt.legend(title="grade",loc='upper right',bbox_to_anchor=(1.5,1))
+plt.show()
+
+import numpy as np
+import matplotlib.pyplot as plt
+x=np.linspace(0,2*np.pi,100)
+y=np.sin(x)
+plt.plot(x,y)
+plt.show()
+
+
+
+
+x=np.linspace(-5,5,100)
+y1=x**2
+y2=x**3
+plt.plot(x,y1,label='y=x^2',color='red',linestyle='dotted')
+plt.plot(x,y2,label='y=x^3',color='blue')
+plt.legend()
+plt.show()
+
+x=np.array(['a','b','c','d','e'])
+y=np.array([78,88,99,64,35])
+plt.bar(x,y)
+plt.xlabel("student")
+plt.ylabel("mark")
+plt.title("student mark")
+plt.show()
+
+x=np.array(['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'])
+food=np.array([2000,3000,2500,1500,2000,3000,2500,1500,2000,3000,1500,4000])
+transport=np.array([1000,2004,1500,3000,2500,2500,0,2000,1500,800,1000,3000])
+utility=np.array([100,200,300,100,200,300,100,100,200,200,1000,0])
+plt.bar(x,food,label='food')
+plt.bar(x,transport,bottom=food,label='transport')
+plt.bar(x,utility,bottom=food+transport,label='utility')
+plt.legend()
+plt.show()
+
+np.random.seed(35)
+data=np.random.normal(loc=0,scale=1,size=1000)
+plt.hist(data,bins=20,edgecolor='black',facecolor='purple')
+plt.show()
+
+x=np.array([150,160,170,180,190,200,210])
+y=np.array([55,60,65,70,75,85,50])
+sizes=np.array([100,200,300,450,500,650,550]) # Corrected sizes to match the number of data points
+plt.scatter(x,y,s=sizes,)
+plt.xlabel('height')
+plt.ylabel('weight')
+plt.show()
+
+x=np.array([150,160,170,180,190,200,210])
+y=np.array([55,60,65,70,75,85,50])
+plt.scatter(x,y,)
+plt.plot(x,y)
+plt.xlabel('height')
+plt.ylabel('weight')
+plt.show()
+
+quarter=np.array(['q1','q2','q3','q4'])
+sales=np.array([150,180,200,170])
+plt.pie(sales,labels=quarter)
+plt.title("Sales report of the month")
+plt.subplot(1,3,1)
+plt.show()
+expanses=np.array([120,140,130,150])
+plt.bar(quarter,sales,label='sales',color='red')
+plt.bar(quarter,expanses,bottom=sales,label='expanses',color='blue')
+plt.legend()
+plt.plot(quarter,expanses)
+plt.title("expanses report of the month")
+plt.subplot(1,3,2)
+plt.show()
+
+x=np.arange(1,11)
+y=np.array([1.9,2.1,3.2,4.3,5.6,3.5,6.2,4.5,7.0, 8.0])
+plt.scatter(x,y)
+plt.plot(x,y,color='red')
+plt.show()
+
+x=np.array([1,2,3,4])
+y=np.array([10,15,13,18])
+y2=np.random.randint(70,100,70)
+
+plt.subplot(2,2,1) # Moved subplot call before scatter plot
+plt.plot(x,y)
+
+
+plt.subplot(2,2,2) # Moved subplot call before scatter plot
+plt.scatter(x,y)
+
+
+plt.subplot(2,2,3) # Moved subplot call before hist plot
+np.random.seed(35)
+plt.hist(y2,bins=70,edgecolor='black') # Corrected typo: edegcolor to edgecolor
+
+
+plt.subplot(2,2,4) # Moved subplot call before bar plot
+plt.bar(x,y)
+
+
+plt.show() # Call show only once at the end
+
+x=np.linspace(0,2*np.pi,100)
+y1=np.sin(x)
+y2=100*np.cos(x)
+y3=np.exp(-x)
+fig,ax1=plt.subplots()
+ax1.plot(x,y1,'b',label="y=sin(x)")
+ax1.set_xlabel('x_axis')
+ax1.set_ylabel('y1_axis',color='blue')
+ax1.tick_params(axis='y',labelcolor='blue',color='blue')
+ax2=ax1.twinx()
+ax2.plot(x,y2,'r',label="y=100*cos(x)")
+ax2.set_ylabel('y2_axis',color='red')
+ax2.tick_params(axis='y',labelcolor='red',color='red')
+ax3=ax1.twinx()
+ax3.plot(x,y3,'g',label="y=exp(-x)")
+ax3.set_ylabel('y3_axis',color='green')
+ax3.tick_params(axis='y',labelcolor='green',color='green')
+ax3.spines['right'].set_position(('outward',60))
+lines1,labels1=ax1.get_legend_handles_labels()
+lines2,labels2=ax2.get_legend_handles_labels()
+lines3,labels3=ax3.get_legend_handles_labels()
+lines=lines1+lines2+lines3
+labels=labels1+labels2+labels3
+plt.legend(lines,labels,loc='upper right')
+plt.show()
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Sample data
+x = np.random.rand(50)
+y = np.random.rand(50)
+z = np.random.rand(50)
+colors = np.random.rand(50, 3) # Generate random colors for each bar
+
+# Create 3D plot
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+
+# Scatter plot
+ax.scatter(x, y, z, color=colors) # Use the array of colors
+
+# Labels
+ax.set_xlabel('X Axis')
+ax.set_ylabel('Y Axis')
+ax.set_zlabel('Z Axis')
+ax.set_title('3D Scatter Plot')
+
+plt.show()
+
+from mpl_toolkits.mplot3d import Axes3D
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Create data
+X = np.linspace(-5, 5, 50)
+Y = np.linspace(-5, 5, 50)
+X, Y = np.meshgrid(X, Y)
+Z = np.sin(np.sqrt(X**2 + Y**2))
+
+# Plot
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+ax.plot_surface(X, Y, Z, cmap='viridis')
+
+# Labels
+ax.set_xlabel('X Axis')
+ax.set_ylabel('Y Axis')
+ax.set_zlabel('Z Axis')
+ax.set_title('3D Surface Plot')
+
+plt.show()
+
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Data
+x = np.linspace(0, 10, 100)
+y1 = np.sin(x)
+y2 = np.cos(x)
+
+# Create subplots (2 rows, 1 column), share X-axis
+fig, (ax1, ax2) = plt.subplots(2, 1, sharex=True, figsize=(8,6))
+
+# Top plot
+ax1.plot(x, y1, 'b', label='sin(x)')
+ax1.set_ylabel("sin(x)")
+ax1.legend()
+ax1.grid(True)
+
+# Bottom plot
+ax2.plot(x, y2, 'r', label='cos(x)')
+ax2.set_ylabel("cos(x)")
+ax2.set_xlabel("X values")
+ax2.legend()
+ax2.grid(True)
+
+# Adjust layout
+plt.tight_layout()
+plt.show()
+
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Sample data
+x = np.linspace(0, 10, 100)
+y1 = np.sin(x)        # First plot
+y2 = np.exp(0.3*x)    # Second plot
+
+# Create figure and axis
+fig, ax1 = plt.subplots(figsize=(8, 5))
+
+# Plot the first data on ax1
+ax1.plot(x, y1, 'b-', label='sin(x)')
+ax1.set_xlabel('X-axis')
+ax1.set_ylabel('sin(x)', color='b')
+ax1.tick_params(axis='y', labelcolor='b')
+
+# Create a second y-axis sharing the same x-axis
+ax2 = ax1.twinx()
+ax2.plot(x, y2, 'r--', label='exp(0.3x)')
+ax2.set_ylabel('exp(0.3x)', color='r')
+ax2.tick_params(axis='y', labelcolor='r')
+
+# Optional: add legends
+lines_1, labels_1 = ax1.get_legend_handles_labels()
+lines_2, labels_2 = ax2.get_legend_handles_labels()
+ax1.legend(lines_1 + lines_2, labels_1 + labels_2, loc='upper left')
+
+plt.title('Shared X-axis with Two Y-axes Example')
+plt.show()
+
+
+import pandas as pd
+import numpy as np
+d={'first score':[100,90,np.nan,95],'second score':[30,27,56,np.nan],'third score':[np.nan,40,80,98]}
+df=pd.DataFrame(d)
+df
+missing_vals=df.isnull().sum()
+missing_vals
+missing_vals_FS=df['first score'].isnull().sum()
+missing_vals_FS
+df.dropna()
+df.dropna(how='all')
+
+import pandas as pd
+data=[1,2,3,4]
+ser=pd.Series(data)
+print(ser)
+
+import pandas as pd
+import numpy as np
+data=np.array(['a','b','c','d','f','o','r','g','e','e','k','s'])
+ser=pd.Series(data,index=[10,11,12,13,14,15,16,17,18,19,20,21])
+print(ser)
+
+print(ser[:5])
+
+print(ser[:7])
+
+print(ser[16])
+
+import pandas as pd
+df=pd.read_csv('nba.csv')
+print(df)
+ser=pd.Series(df['Name'])
+print(ser)
+data=ser.head(10)
+print(data)
+
+
+print(data.loc[3:6])
+print(data.iloc[3:6])
+
+data[2]
+
+data[1:3]
+
+import pandas as pd
+s1=pd.Series([1,2,3,4],index=['a','b','c','d'])
+s2=pd.Series([5,6,7,8],index=['a','b','c','d'])
+result_add=s1+s2
+print(result_add)
+ssum=s1.add(s2)
+print(ssum)
+
+result_sub=s1-s2
+print(result_sub)
+ssub=s1.sub(s2)
+print(ssub)
+
+import pandas as pd
+s1=pd.Series([1,2,3,4],index=['a','b','a','d'])
+s2=pd.Series([5,6,7,8],index=['a','b','a','d'])
+result_add=s1+s2
+print(result_add)
+ssum=s1.add(s2)
+print(ssum)
+
+import pandas as pd
+s1=pd.Series([1,2,3,4],index=['a','b','c','d'])
+s2=pd.Series([5,6,7,8],index=['a','b','c','a'])
+result_add=s1+s2
+print(result_add)
+ssum=s1.add(s2)
+print(ssum)
+
+import pandas as pd
+s1=pd.Series([1,2,3,4],index=['a','b','c','d'])
+s2=pd.Series([5,6,7],index=['a','b','c'])
+result_add=s1+s2
+print(result_add)
+ssum=s1.add(s2)
+print(ssum)
+
+comparison
+
+
+s1=pd.Series([10,20,30])
+s2=pd.Series([10,20,30])
+print(s1==s2)
+print(s1<s2)
+print(s1>s2)
+
+print(s1.sum())
+print(s1.mean())
+print(s1.max())
+print(s1.min())
+print(s1.median())
+
+filtering
+
+s=pd.Series([10,20,30,40,50,60,70,80])
+print(s[s>25])
+
+s=pd.Series(['a','b','a','o'],dtype='string')
+print(s)
+
+da=['m','f','m','f','m','f','m','f']
+df=pd.Categorical(da,categories=['f','m'],ordered=True)
+print(df)
+
+df=pd.DataFrame({'fruits':['a','k','w','b'],'size':['small','large','medium','small']})
+df['fruits']=df['fruits'].astype('category')
+print(df.info())
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+df=pd.DataFrame(np.random.randn(10,4),index=pd.date_range('1/1/2000',periods=10),columns=list('ABCD'))
+print(df)
+df.plot()
+plt.show()
+
+df.plot(kind='bar')
+plt.show()
+
+df.plot(kind='barh')
+plt.show()
+
+df.plot(kind='barh',stacked=True)
+plt.show()
+
+df.plot(kind='bar',stacked=True)
+plt.show()
+
+df.plot(kind='hist')
+plt.show()
+
+df.plot(kind='area', stacked=False)
+plt.show()
+
+df.plot(kind='scatter', x='A', y='B')
+plt.show()
+
+import matplotlib.pyplot as plt
+df=pd.DataFrame({'a':np.random.randn(1000)+1,'b':np.random.randn(1000),'c':np.random.randn(1000)-1},columns=['a','b','c'])
+df.plot(kind='hist',bins=20)
+plt.show()
+
+scipy integration
+
+
+import numpy as np
+from scipy import integrate
+import matplotlib.pyplot as plt
+
+def f(x):
+  return np.sin(x)
+int_res,err=integrate.quad(f,0,np.pi)
+print(f"Numerical interadetion result:{int_res}")
+print(f"Error:{err}")
+
+def f(x):
+  return x**2
+int_res,err=integrate.quad(f,0,1)
+print(f"Numerical interadetion result:{int_res}")
+print(f"Error:{err}")
+
+def f(x):
+  return np.exp(-x)
+int_res,err=integrate.quad(f,0,np.inf)
+print(f"Numerical interadetion result:{int_res}")
+print(f"Error:{err}")
+
+def model(y,t):
+  return -2*y
+y0=1
+t=np.linspace(0,10,100)
+sol=integrate.odeint(model,y0,t)
+plt.figure(figsize=(8,6))
+plt.plot(t,sol,label='y(t)=e^{-2t}',color='blue')
+plt.title("solution if ODE dy/dt=-2y")
+plt.xlabel("time T")
+plt.ylabel("y(t)")
+plt.grid(True)
+plt.legend()
+plt.show()
+
+import scipy.optimize as opt
+import numpy as np
+import matplotlib.pyplot as plt
+objective=np.poly1d([1.0,-1.0,0.0])
+print(objective)
+x0=1.0
+results=opt.minimize(objective,x0)
+x=np.linspace(-3,5,100)
+plt.plot(x,objective(x))
+plt.scatter(results.x,objective(results.x),color='red')
+plt.show()
